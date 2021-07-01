@@ -4,11 +4,13 @@ import os
 
 API_ID = os.environ["API_ID"]
 API_KEY = os.environ["API_KEY"]
-GENDER = "male"
-WEIGHT_KG = 99
-HEIGHT_CM = 180
-AGE = 30
+GENDER = Your Gender
+WEIGHT_KG = Your Weight
+HEIGHT_CM = Your Height
+AGE = Your age
 
+exercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
+sheet_endpoint = os.environ["sheet_endpoint"]
 
 text = input("what exercise did you today")
 
@@ -25,10 +27,6 @@ headers = {
  "x-app-key": API_KEY,
  "Content-Type": "application/json"
 }
-
-exercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
-sheet_endpoint = os.environ["sheet_endpoint"]
-
 
 response = requests.post(url=exercise_endpoint, json=user_params, headers=headers)
 result = response.json()

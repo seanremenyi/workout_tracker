@@ -1,0 +1,4 @@
+export API_ID = ""
+export API_KEY = ""
+export sheet_endpoint = ""
+export token = ""
