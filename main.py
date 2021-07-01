@@ -1,6 +1,9 @@
 import requests
 from datetime import datetime
+import os
 
+API_ID = os.environ["API_ID"]
+API_KEY = os.environ["API_KEY"]
 GENDER = "male"
 WEIGHT_KG = 99
 HEIGHT_CM = 180
@@ -24,7 +27,8 @@ headers = {
 }
 
 exercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
-sheet_endpoint = ""
+sheet_endpoint = os.environ["sheet_endpoint"]
+
 
 response = requests.post(url=exercise_endpoint, json=user_params, headers=headers)
 result = response.json()
@@ -43,5 +47,13 @@ for exercise in result["exercises"]:
         }
     }
 
-    sheet_response = requests.post(sheet_endpoint, json=sheet_inputs)
+    bearer_headers = {
+     "Authorization": f"Bearer {os.environ['token']}"
+    }
+    sheet_response = requests.post(
+     sheet_endpoint,
+     json=sheet_inputs,
+     headers=bearer_headers
+    )
+
     print(sheet_response.text)
